@@ -1,4 +1,8 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
@@ -6,4 +10,23 @@
   display: inline-block;
   min-width: 300px;
   margin: 10px;
+}
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.conatinerWeather {
+  margin: 10px;
+  background-color: rgb(167, 108, 108);
+  color: greenyellow;
+  border-radius: 20px;
+  padding: 10px;
+}
+.headding {
+  width: 100%;
+  text-align: center;
+  background-color: palevioletred;
+  padding: 30px;
+  font-size: 50px;
 }

@@ -19,7 +19,7 @@ const useApiFetch = (url: string, value: string, trigerApi: boolean) => {
         setError({ type: 200, message: "pleace provide valid information" });
       }
     } catch (e: any) {
-      console.log(JSON.stringify(e));
+      console.log("s", JSON.stringify(e));
       setError({ type: 400, message: JSON.stringify(e.message) });
     } finally {
       setIsLoading(false);

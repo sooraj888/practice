@@ -7,19 +7,22 @@ const CountryDetails = () => {
   const localState: any = useLocation().state;
 
   const [hideWeather, setHideWeather] = useState(false);
-  console.log(localState);
 
-  const url = "";
+  const url =
+    "http://api.weatherstack.com/current?access_key=6434656c6d97f03d4ede6dd171ec4c36&query=";
   const [trigerApi, setTrigerApi] = useState(false);
   const [capital, setCapital] = useState("");
   const { isLoading, data, error } = useApiFetch(url, capital, trigerApi);
 
   const showWeather = () => {
+    if (!data) {
+      setTrigerApi((prev) => !prev);
+    }
     setHideWeather((prev) => !prev);
     setCapital(localState?.capital);
   };
 
-  //imp
+  // http://api.weatherstack.com/current?access_key=6434656c6d97f03d4ede6dd171ec4c36&query=
   if (!localState) {
     return <div>No Data Found</div>;
   }
@@ -52,15 +55,34 @@ const CountryDetails = () => {
         <img src={localState?.flags?.png} alt="flag"></img>
       </div>
       <div>
-        <button onClick={showWeather}>Weather-Details</button>
+        <button onClick={showWeather}>
+          {isLoading ? "Loadding" : "Weather-Details"}
+        </button>
       </div>
-      {hideWeather && data && <WeatherDetails />}
+      {hideWeather && data && <WeatherDetails data={data} />}
     </div>
   );
 };
 
 export default CountryDetails;
 
-const WeatherDetails = () => {
-  return <div>sad</div>;
+const WeatherDetails = ({ data }: any) => {
+  const {
+    current: { weather_icons, weather_descriptions, wind_speed, temperature },
+  } = data;
+
+  return (
+    <div className="conatinerWeather">
+      <div>
+        <span>WindSpeed</span>:<span>{wind_speed} </span>
+      </div>
+      <div>
+        <span>Temprature</span>:<span>{temperature}</span>
+      </div>
+      <div className="icon">
+        <span>weather_descriptions</span>:<span>{weather_descriptions[0]}</span>
+        <img src={weather_icons[0]} alt="" />
+      </div>
+    </div>
+  );
 };

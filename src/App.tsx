@@ -9,10 +9,11 @@ import CountryDetails from "./pages/CountryDetails";
 function App() {
   return (
     <div className="App">
-      <Link to="/">Country Weather App</Link>
+      <Link to="/" className="headding">
+        Country Weather App
+      </Link>
       <Routes>
         <Route path="/" element={<CountryInput />} />
-
         <Route
           path="countryDeatils"
           element={<CountryDetails></CountryDetails>}
